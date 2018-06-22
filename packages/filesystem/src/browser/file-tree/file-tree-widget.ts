@@ -25,6 +25,7 @@ import { ElementAttrs } from "@phosphor/virtualdom";
 import { DirNode, FileStatNode } from "./file-tree";
 import { FileTreeModel } from "./file-tree-model";
 import { DisposableCollection, Disposable } from '@theia/core/lib/common';
+import { TreeReactWidget } from "@theia/core/lib/browser/tree/tree-react-widget";
 
 export const FILE_TREE_CLASS = 'theia-FileTree';
 export const FILE_STAT_NODE_CLASS = 'theia-FileStatNode';
@@ -32,7 +33,7 @@ export const DIR_NODE_CLASS = 'theia-DirNode';
 export const FILE_STAT_ICON_CLASS = 'theia-FileStatIcon';
 
 @injectable()
-export class FileTreeWidget extends TreeWidget {
+export class FileTreeWidget extends TreeReactWidget {
 
     protected readonly toCancelNodeExpansion = new DisposableCollection();
 
