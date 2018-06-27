@@ -169,7 +169,11 @@ export class BackendApplication {
 
         server.listen(port, hostname, () => {
             const scheme = this.cliParams.ssl ? 'https' : 'http';
-            this.logger.info(`Theia app listening on ${scheme}://${hostname || 'localhost'}:${server.address().port}.`);
+            const address = server.address();
+            if (typeof address === 'string') {
+                throw new Error('Unexpected pipe address.');
+            }
+            this.logger.info(`Theia app listening on ${scheme}://${hostname || 'localhost'}:${address.port}.`);
             deferred.resolve(server);
         });
 

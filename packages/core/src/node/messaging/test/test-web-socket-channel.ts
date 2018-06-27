@@ -27,7 +27,11 @@ export class TestWebSocketChannel extends WebSocketChannel {
         path: string
     }) {
         super(0, content => socket.send(content));
-        const socket = new ws(`ws://localhost:${server.address().port}${WebSocketChannel.wsPath}`);
+        const address = server.address();
+        if (typeof address === 'string') {
+            throw new Error('Unexpected pipe address.');
+        }
+        const socket = new ws(`ws://localhost:${address.port}${WebSocketChannel.wsPath}`);
         socket.on('error', error =>
             this.fireError(error)
         );
